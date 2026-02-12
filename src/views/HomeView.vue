@@ -3,10 +3,10 @@
     <div class="page-content">
       <h1 class="title">Jogo da Memória</h1>
       <p class="lead">
-        Encontre os pares de cartas em 5 níveis de dificuldade: 10, 20, 30, 40 e 50 cartas.
+        Encontre os pares de cartas em 10 níveis de dificuldade: 10, 20, 30, 40, 50, 60, 70, 80, 90 e 100 cartas.
       </p>
       <p>
-        Jogo da Memória é um jogo de navegador gratuito. Clique nas cartas para virá-las e forme os pares. Complete todos os 5 níveis para vencer.
+        Jogo da Memória é um jogo de navegador gratuito. Clique nas cartas para virá-las e forme os pares. Complete todos os 10 níveis para vencer.
       </p>
       <router-link to="/jogo" class="btn-play">Jogar agora</router-link>
     </div>

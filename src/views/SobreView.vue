@@ -6,7 +6,7 @@
         <strong>Jogo da Memória</strong> é o clássico jogo de encontrar pares que você joga direto no navegador, sem precisar instalar nada. O objetivo é virar as cartas e formar todos os pares com o menor número de jogadas possível.
       </p>
       <p>
-        O jogo possui 5 níveis: começando com 10 cartas e aumentando até 50 cartas no último nível. Cada nível deve ser completado para avançar. O jogo foi feito para ser rápido de carregar e divertido em qualquer dispositivo.
+        O jogo possui 10 níveis: começando com 10 cartas e aumentando até 100 cartas no último nível. Cada nível deve ser completado para avançar. O jogo foi feito para ser rápido de carregar e divertido em qualquer dispositivo.
       </p>
       <p>
         Jogo da Memória é um projeto independente, jogável gratuitamente no navegador. Aproveite e boa sorte!

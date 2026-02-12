@@ -18,6 +18,11 @@
           <li><strong>Nível 3:</strong> 30 cartas (15 pares)</li>
           <li><strong>Nível 4:</strong> 40 cartas (20 pares)</li>
           <li><strong>Nível 5:</strong> 50 cartas (25 pares)</li>
+          <li><strong>Nível 6:</strong> 60 cartas (30 pares)</li>
+          <li><strong>Nível 7:</strong> 70 cartas (35 pares)</li>
+          <li><strong>Nível 8:</strong> 80 cartas (40 pares)</li>
+          <li><strong>Nível 9:</strong> 90 cartas (45 pares)</li>
+          <li><strong>Nível 10:</strong> 100 cartas (50 pares)</li>
         </ul>
       </section>
 
