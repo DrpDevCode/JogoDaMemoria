@@ -36,12 +36,14 @@ function toggleAmbience() {
   }
 }
 
-const LEVELS = [10, 20, 30, 40, 50] // total cards per level (5, 10, 15, 20, 25 pairs)
+const LEVELS = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] // total cards per level (5, 10, 15, 20, 25, 30, 35, 40, 45, 50 pairs)
 
 const EMOJIS = [
   '🎮', '🎯', '🎲', '🎪', '🎨', '🎭', '🎸', '🎺', '🎷', '🥁',
   '🚀', '⭐', '🌈', '🔥', '💎', '🌸', '🍀', '🌻', '🐶', '🐱',
-  '🦊', '🐻', '🐼', '🦁', '🐸'
+  '🦊', '🐻', '🐼', '🦁', '🐸', '🐵', '🐔', '🐷', '🐮', '🐰',
+  '🐭', '🐹', '🐻‍❄️', '🐨', '⚽', '🎾', '🏀', '🏈', '🏉', '🏐',
+  '🎃', '🎄', '🎆', '🎇', '🎈', '🎉', '🎊', '🎋', '🎌', '🎍',
 ]
 
 const currentLevel = ref(1)
@@ -202,7 +204,7 @@ onUnmounted(() => {
 
     <div v-if="gameWon" class="overlay win">
       <p class="overlay-title">Parabéns!</p>
-      <p>Você completou todos os 5 níveis.</p>
+      <p>Você completou todos os {{ LEVELS.length }} níveis.</p>
       <button class="btn-action" @click="currentLevel = 1; gameWon = false; initLevel()">
         Jogar novamente
       </button>
