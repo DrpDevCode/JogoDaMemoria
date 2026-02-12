@@ -47,21 +47,23 @@
 
 <style scoped>
 .como-jogar {
-  padding: 2rem 1rem 4rem;
+  padding: 1rem 0.75rem 3rem;
 }
 .page-content {
   max-width: 640px;
   margin: 0 auto;
+  padding: 0 0.25rem;
+  box-sizing: border-box;
 }
 h1 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  margin-bottom: 1rem;
   color: #fff;
 }
 h2 {
-  font-size: 1.25rem;
+  font-size: clamp(1.1rem, 3vw, 1.25rem);
   color: rgba(255, 255, 255, 0.95);
-  margin: 1.5rem 0 0.75rem;
+  margin: 1.25rem 0 0.5rem;
 }
 section:first-of-type h2 {
   margin-top: 0;
@@ -70,9 +72,10 @@ p, li {
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.65;
   margin-bottom: 0.5rem;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 ul {
-  padding-left: 1.25rem;
+  padding-left: 1rem;
   margin-bottom: 1rem;
 }
 li {
@@ -81,20 +84,28 @@ li {
 kbd {
   display: inline-block;
   padding: 0.15rem 0.4rem;
-  font-size: 0.9em;
+  font-size: 0.85em;
   background: rgba(255, 255, 255, 0.15);
   border-radius: 4px;
   margin: 0 0.1rem;
 }
 .cta {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 .link {
   color: #646cff;
   font-weight: 500;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 .link:hover {
   color: #535bf2;
   text-decoration: underline;
+}
+@media (min-width: 600px) {
+  .como-jogar {
+    padding: 2rem 1rem 4rem;
+  }
 }
 </style>

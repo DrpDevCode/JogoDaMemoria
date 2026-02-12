@@ -26,15 +26,21 @@ const isGame = computed(() => route.name === 'jogo')
 <style>
 #app {
   min-height: 100vh;
+  min-height: calc(100vh - env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
   padding: 0;
   margin: 0;
   background: #0d1520;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 #app.fullscreen {
   padding: 0;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
   align-items: stretch;
   justify-content: stretch;
 }
@@ -44,6 +50,7 @@ const isGame = computed(() => route.name === 'jogo')
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 0;
 }
 
 .site-header {
@@ -51,15 +58,18 @@ const isGame = computed(() => route.name === 'jogo')
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
-  padding: 0.75rem 1.5rem;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+  padding-left: max(0.75rem, env(safe-area-inset-left));
+  padding-right: max(0.75rem, env(safe-area-inset-right));
   background: rgba(13, 21, 32, 0.95);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.title {
+.site-header .title {
   margin: 0;
-  font-size: 2rem;
+  font-size: clamp(1.25rem, 5vw, 2rem);
   color: #f0f0f0;
   font-family: 'Cardot', sans-serif;
   text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
@@ -79,13 +89,18 @@ const isGame = computed(() => route.name === 'jogo')
 .site-header nav {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .site-header nav a {
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  font-size: 0.95rem;
+  font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+  padding: 0.35rem 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .site-header nav a:hover,
@@ -106,5 +121,16 @@ const isGame = computed(() => route.name === 'jogo')
 
 main {
   flex: 1;
+  min-width: 0;
+}
+
+@media (min-width: 600px) {
+  .site-header {
+    padding: 0.75rem 1.5rem;
+    gap: 1rem;
+  }
+  .site-header nav {
+    gap: 1.25rem;
+  }
 }
 </style>

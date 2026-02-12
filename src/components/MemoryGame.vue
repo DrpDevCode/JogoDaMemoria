@@ -133,16 +133,25 @@ function isFlipped(card) {
   return flippedIds.value.has(card.id) || matchedIds.value.has(card.id)
 }
 
+const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 600)
+
 const gridCols = computed(() => {
   const n = LEVELS[currentLevel.value - 1]
-  if (n <= 10) return 5
-  if (n <= 20) return 5
-  if (n <= 30) return 6
-  if (n <= 40) return 8
-  return 10
+  let cols = 10
+  if (n <= 10) cols = 5
+  else if (n <= 20) cols = 5
+  else if (n <= 30) cols = 6
+  else if (n <= 40) cols = 8
+  const w = windowWidth.value
+  const maxCols = w < 360 ? 4 : w < 420 ? 5 : w < 500 ? 6 : w < 600 ? 8 : 10
+  return Math.min(cols, maxCols)
 })
 
 watch(currentLevel, () => initLevel(), { immediate: true })
+
+function onResize() {
+  windowWidth.value = window.innerWidth
+}
 
 onMounted(() => {
   try {
@@ -150,10 +159,13 @@ onMounted(() => {
     if (pref === '0') ambienceOn.value = false
   } catch (_) {}
   startAmbience()
+  window.addEventListener('resize', onResize)
+  windowWidth.value = window.innerWidth
 })
 
 onUnmounted(() => {
   stopAmbience()
+  window.removeEventListener('resize', onResize)
 })
 </script>
 
@@ -217,31 +229,44 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.75rem;
+  padding: 0.5rem;
   margin: 0 auto;
   max-width: 900px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  min-height: 0;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .title {
   margin: 0;
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   color: #f0f0f0;
   font-family: 'Cardot', system-ui, sans-serif;
   text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 55vw;
 }
 
 .top-bar {
   width: 100%;
+  flex-shrink: 0;
 }
 
 .top-bar-inner {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
   background: linear-gradient(180deg, rgba(30, 45, 65, 0.95) 0%, rgba(20, 32, 48, 0.98) 100%);
-  border-radius: 14px;
+  border-radius: 12px;
   border: 1px solid rgba(100, 150, 200, 0.2);
 }
 
@@ -253,7 +278,7 @@ onUnmounted(() => {
 }
 
 .hud-label {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -261,7 +286,7 @@ onUnmounted(() => {
 }
 
 .hud-moves {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: #90caf9;
 }
@@ -324,30 +349,44 @@ onUnmounted(() => {
 
 .board {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.25rem;
   width: 100%;
-  max-width: 560px;
+  max-width: min(560px, calc(100vw - 1rem));
   margin: 0 auto;
   perspective: 800px;
+  flex-shrink: 0;
 }
 
 .card-btn {
   aspect-ratio: 1;
+  min-width: 0;
+  min-height: 44px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   padding: 0;
-  font-size: 1.5rem;
+  font-size: clamp(0.875rem, 4.5vw, 2rem);
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.35s ease, background 0.2s;
   background: transparent;
   border: 1px solid rgba(100, 150, 200, 0.25);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .card-btn:hover:not(.flipped):not(.matched) {
   transform: scale(1.03);
+}
+
+@media (hover: none) {
+  .card-btn:hover:not(.flipped):not(.matched) {
+    transform: none;
+  }
+  .card-btn:active:not(.flipped):not(.matched) {
+    transform: scale(0.98);
+  }
 }
 
 .card-btn .card-back,
@@ -358,7 +397,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   backface-visibility: hidden;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .card-btn .card-back {
@@ -392,23 +431,30 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  padding: 1rem;
   background: rgba(10, 22, 40, 0.92);
   color: #e0e0e0;
   z-index: 20;
+  box-sizing: border-box;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .overlay-title {
-  font-size: 1.75rem;
+  font-size: clamp(1.25rem, 5vw, 1.75rem);
   font-weight: 700;
   color: #ffeb3b;
   margin: 0;
   text-shadow: 0 0 20px rgba(255, 235, 59, 0.4);
+  text-align: center;
 }
 
 .overlay p {
   margin: 0;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  text-align: center;
 }
 
 .overlay.win .overlay-title {
@@ -417,8 +463,10 @@ onUnmounted(() => {
 }
 
 .btn-action {
-  padding: 0.75rem 2rem;
-  font-size: 1.1rem;
+  padding: 0.75rem 1.5rem;
+  min-height: 48px;
+  min-width: 160px;
+  font-size: 1rem;
   font-weight: 600;
   color: #0a1628;
   background: linear-gradient(180deg, #66bb6a 0%, #43a047 100%);
@@ -428,6 +476,8 @@ onUnmounted(() => {
   box-shadow: 0 4px 15px rgba(67, 160, 71, 0.5);
   transition: transform 0.15s, box-shadow 0.15s;
   margin-top: 0.5rem;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .btn-action:hover {
@@ -435,12 +485,49 @@ onUnmounted(() => {
   box-shadow: 0 6px 20px rgba(67, 160, 71, 0.6);
 }
 
+@media (max-width: 480px) {
+  .ambience-label {
+    display: none;
+  }
+  .ambience-toggle {
+    padding: 0.5rem;
+  }
+}
+
 @media (min-width: 600px) {
+  .memory-game {
+    padding: 1rem;
+    gap: 1rem;
+  }
+  .title {
+    font-size: 1.75rem;
+    max-width: none;
+  }
+  .top-bar-inner {
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 14px;
+  }
+  .hud-label {
+    font-size: 0.75rem;
+  }
+  .hud-moves {
+    font-size: 1rem;
+  }
   .board {
     gap: 0.6rem;
   }
   .card-btn {
     font-size: 2rem;
+    border-radius: 10px;
+  }
+  .card-btn .card-back,
+  .card-btn .card-front {
+    border-radius: 10px;
+  }
+  .btn-action {
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
   }
 }
 </style>

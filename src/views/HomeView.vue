@@ -19,37 +19,45 @@
 <style scoped>
 .home {
   text-align: center;
-  padding: 2rem 1rem 4rem;
+  padding: 1rem 0.75rem 3rem;
 }
 .page-content {
   max-width: 560px;
   margin: 0 auto;
+  padding: 0 0.25rem;
 }
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  margin-bottom: 0.75rem;
   color: #fff;
 }
 .lead {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 3vw, 1.2rem);
   color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 p {
   color: rgba(255, 255, 255, 0.75);
   margin-bottom: 1rem;
   line-height: 1.6;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 .btn-play {
   display: inline-block;
-  margin-top: 1.5rem;
-  padding: 0.85rem 2rem;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  min-height: 48px;
+  min-width: 160px;
   background: linear-gradient(135deg, #535bf2 0%, #646cff 100%);
   color: #fff;
   font-weight: 600;
+  font-size: 1rem;
   border-radius: 8px;
   text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  box-sizing: border-box;
 }
 .btn-play:hover {
   transform: translateY(-2px);
@@ -57,9 +65,17 @@ p {
 }
 .title {
   margin: 0;
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 6vw, 2rem);
   color: #f0f0f0;
   font-family: 'Cardot', sans-serif;
   text-shadow: 0 0 10px rgba(100, 200, 255, 0.5);
+}
+@media (min-width: 600px) {
+  .home {
+    padding: 2rem 1rem 4rem;
+  }
+  .btn-play {
+    padding: 0.85rem 2rem;
+  }
 }
 </style>

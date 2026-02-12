@@ -7,7 +7,7 @@
       <section>
         <h2>1. Informações que coletamos</h2>
         <p>
-          O jogo <strong>Snake Game</strong> pode armazenar dados localmente no seu dispositivo (por exemplo, no navegador), como o recorde de pontuação (high score). Nenhum dado pessoal é enviado a nossos servidores para fins de cadastro ou identificação.
+          O jogo <strong>Jogo da Memória</strong> pode armazenar dados localmente no seu dispositivo (por exemplo, no navegador), como o recorde de pontuação (high score). Nenhum dado pessoal é enviado a nossos servidores para fins de cadastro ou identificação.
         </p>
       </section>
 
@@ -54,26 +54,28 @@
 
 <style scoped>
 .privacidade {
-  padding: 2rem 1rem 4rem;
+  padding: 1rem 0.75rem 3rem;
 }
 .page-content {
   max-width: 640px;
   margin: 0 auto;
+  padding: 0 0.25rem;
+  box-sizing: border-box;
 }
 h1 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 5vw, 2rem);
   margin-bottom: 0.5rem;
   color: #fff;
 }
 .updated {
   color: rgba(255, 255, 255, 0.5);
-  font-size: 0.9rem;
-  margin-bottom: 2rem;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  margin-bottom: 1.5rem;
 }
 h2 {
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 3vw, 1.15rem);
   color: rgba(255, 255, 255, 0.95);
-  margin: 1.75rem 0 0.5rem;
+  margin: 1.25rem 0 0.5rem;
 }
 section:first-of-type h2 {
   margin-top: 0;
@@ -82,8 +84,17 @@ p {
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.65;
   margin-bottom: 0.75rem;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 p strong {
   color: #fff;
+}
+@media (min-width: 600px) {
+  .privacidade {
+    padding: 2rem 1rem 4rem;
+  }
+  .updated {
+    margin-bottom: 2rem;
+  }
 }
 </style>
